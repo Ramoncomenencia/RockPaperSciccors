@@ -4,6 +4,7 @@
 
 
 function getComputerChoice(){
+    
     let random = Math.floor(Math.random() * 3);
     
     let choice = (random == 0) ? 'Rock':
@@ -12,5 +13,22 @@ function getComputerChoice(){
     return choice;
 }
 
-//Step 3: Human choice 
+//Step 3: Human choice
+function getHumanChoice(){
+    
+    let choice = prompt("Rock, Paper, Sciccors?").toLowerCase();
+        
+    if(choice === 'rock' || choice === 'paper' || choice === 'sciccors'){
+        
+        return choice;
+    } else{
+        alert('Choose a valid option');
+        getHumanChoice();
+    }
+   
+}
+
+
+
+
 
