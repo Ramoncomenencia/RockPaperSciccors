@@ -79,6 +79,7 @@ for(let i = 0; i < rounds; i++){
     getComputerChoice();
     getHumanChoice();
     playRound(humanSelection, computerSelection);
+    console.log('Score: \n' + `Human: ${humanScore} \n` + `Computer: ${computerScore}`);
 }
 
 
