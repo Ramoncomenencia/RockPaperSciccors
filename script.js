@@ -1,88 +1,60 @@
-//Global variables
-let computerScore = 0;
-let humanScore = 0;
-let humanSelection;
-let computerSelection;
-const rounds = 5;
-
-
-//Step 1: Setup project strucure
-
-//Step 2: Computer choice
 function getComputerChoice(){
-    
     let random = Math.floor(Math.random() * 3);
-    
+
     let choice = (random == 0) ? 'rock':
     (random == 1) ? 'paper' : 'sciccors';
-
-    computerSelection = choice.at(0).toUpperCase() + choice.slice(1).toLowerCase();
-
-    return computerSelection;
+    return choice;
 }
 
-//Step 3: Human choice
 function getHumanChoice(){
-    
     let choice = prompt("Rock, Paper, Sciccors?").toLowerCase();
-        
+
     if(choice === 'rock' || choice === 'paper' || choice === 'sciccors'){
-
-        humanSelection = choice.at(0).toUpperCase() + choice.slice(1).toLowerCase()
-
-        return humanSelection;
-
+        return choice;
     } else{
-        
         alert('Choose a valid option');
         getHumanChoice();
     }
 }
 
-
-
-//Step 4: Declare players score
-//Step 5: Write single round logic
-function playRound(humanChoice, computerChoice){
-
-    if(humanChoice == 'Rock' && computerChoice == 'Sciccors'){
-
-        humanScore++;
-        return  console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-        
-    } else if(humanChoice == 'Paper' && computerChoice == 'Rock'){
-
-        humanScore++;
-        return console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-
-    } else if(humanChoice == 'Sciccors' && computerChoice == 'Paper'){
-
-        humanScore++;
-        return console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-        
-    } else if(humanChoice == computerChoice){
-        
-        return  console.log(`It\'s a draw! ${humanChoice} equals ${computerChoice}`)
+function playGame(){
     
+    let computerScore = 0;
+    let humanScore = 0;
+    
+    function playRound(humanChoice, computerChoice){
+        if(
+            (humanChoice == 'rock' && computerChoice == 'sciccors') ||
+            (humanChoice == 'paper' && computerChoice == 'rock')    ||
+            (humanChoice == 'sciccors' && computerChoice == 'paper')
+        ){
+            console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+            return humanScore++;
+        
+        } else if(humanChoice === computerChoice){
+            console.log(`It\'s a draw! ${humanChoice} equals ${computerChoice}`);
+        
+        } else{
+            console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+            return computerScore++;
+        }
+    }
+    
+    for(let i = 0; i < 5; i++){
+        playRound(getHumanChoice(), getComputerChoice());
+        console.log(`Score:\nHuman:${humanScore}\nComputer:${computerScore}`)
+    }
+
+    if(humanScore > computerScore){
+        console.log(`Human wins! ${humanScore} against ${computerScore}`);
+    } else if(humanScore === computerScore){
+        console.log(`It\'s a tie! ${humanScore} against ${computerScore}`);
     } else{
-
-        computerScore++;
-        return console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
-
+        console.log(`Computer wins! ${computerScore} against ${humanScore}`);
     }
 }
-
-
-
-
-for(let i = 0; i < rounds; i++){
-    getComputerChoice();
-    getHumanChoice();
-    playRound(humanSelection, computerSelection);
-    console.log('Score: \n' + `Human: ${humanScore} \n` + `Computer: ${computerScore}`);
-}
-
-
+   
+playGame();
 
 
 
