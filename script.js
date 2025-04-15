@@ -13,7 +13,7 @@ function getHumanChoice(){
         return choice;
     } else{
         alert('Choose a valid option');
-        getHumanChoice();
+        return getHumanChoice();
     }
 }
 
